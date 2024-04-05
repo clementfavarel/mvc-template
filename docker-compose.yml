@@ -1,0 +1,46 @@
+services:
+  web:
+    container_name: app_web
+    build:
+      context: ./php
+      dockerfile: Dockerfile
+    ports:
+      - "80:80"
+    depends_on:
+      - db
+    volumes:
+      - .:/var/www/html
+    networks:
+      - app
+
+  db:
+    container_name: app_db
+    build:
+      context: ./db
+      dockerfile: Dockerfile
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: app
+      MYSQL_USER: app
+      MYSQL_PASSWORD: app
+    volumes:
+      - data:/var/lib/mysql
+    networks:
+      - app
+
+  adminer:
+    container_name: app_adminer
+    image: adminer
+    ports:
+      - "8080:8080"
+    depends_on:
+      - db
+    networks:
+      - app
+
+networks:
+  app:
+volumes:
+  data:
