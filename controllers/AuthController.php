@@ -63,7 +63,7 @@ class AuthController extends Controller
         }
 
         $_SESSION['user'] = $user;
-        header('Location: /profile');
+        header('Location: /dashboard');
     }
 
     public function showRegister()
@@ -123,7 +123,7 @@ class AuthController extends Controller
 
         $hashedPwd = password_hash($pwd, PASSWORD_DEFAULT);
         $this->UserModel->create($firstname, $lastname, $email, $hashedPwd);
-        header('Location: /login');
+        header('Location: /dashboard');
     }
 
     public function logout()

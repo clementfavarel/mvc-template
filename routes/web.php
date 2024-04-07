@@ -5,6 +5,7 @@ require_once('./routes/Router.php');
 require_once('./middlewares/AuthMiddleware.php');
 require_once('./controllers/HomeController.php');
 require_once('./controllers/AuthController.php');
+require_once('./controllers/DashboardController.php');
 
 $router = new Router();
 
@@ -20,4 +21,4 @@ $router->post('/register', 'AuthController', 'registerUser');
 
 $router->get('/logout', 'AuthController', 'logout');
 
-$router->get('/profile', 'UserController', 'show', 'AuthMiddleware::handle');
+$router->get('/dashboard', 'DashboardController', 'index', 'AuthMiddleware::handle');
